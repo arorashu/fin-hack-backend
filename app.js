@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var transaction = require('./routes/transaction');
+var location = require('./routes/location');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/transaction', transaction);
+app.use('/location', location);
 
 mongoose.connect('mongodb://127.0.0.1:27017/moneyManager');
 

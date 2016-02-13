@@ -4,16 +4,15 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var foursquare =
 
 var connection = mongoose.createConnection('mongodb://127.0.0.1:27017/moneyManager');
 
 
-
-var Bank = new Schema({
+var Locations = new Schema({
     userNo: Number,
-    Balance: Number,
-    monthlyCredit: Number,
+    latitude: Number,
+    longitude: Number
 });
 
-module.exports = mongoose.model('Bank', Bank);
+module.exports = mongoose.model('Locations', Locations);
