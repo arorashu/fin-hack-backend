@@ -4,11 +4,10 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
 var validate = require('mongoose-validator');
 var autoIncrement = require('mongoose-auto-increment');
 
-var connection = mongoose.createConnection('mongodb://127.0.0.1:27017/innovision');
+var connection = mongoose.createConnection('mongodb://127.0.0.1:27017/moneyManager');
 autoIncrement.initialize(connection);
 
 var nameValidator = [
@@ -32,11 +31,8 @@ var phoneValidator = [
     })
 ];
 
-var Account = new Schema({
-    accNo: Number,
-    provider: String,
-    providerData: Object,
-    accessToken: String,
+var User = new Schema({
+    userNo: Number,
     password: String,
     email: {type:String, validator:emailValidator, unique:true, dropDups:true, trim: true},
     firstName: String,
@@ -49,7 +45,6 @@ var Account = new Schema({
     is_new: {type:Boolean,default:true}
 });
 
-Account.plugin(autoIncrement.plugin, {model: 'Account', field: 'accNo'});
-Account.plugin(passportLocalMongoose, {usernameField: 'email', usernameLowerCase: true});
+User.plugin(autoIncrement.plugin, {model: 'User', field: 'userNo'});
 
-module.exports = mongoose.model('Account', Account);
+module.exports = mongoose.model('User', User);
