@@ -4,12 +4,13 @@
 
 var express = require('express');
 var User = require('../models/User');
+var Bank = require('../models/Bank');
 var Transaction = require('../models/Transactions');
 var router = express.Router();
 
-router.get('/all/:userNo', function (req, res) {
+router.get('/all', function (req, res) {
 
-    Transaction.find({userNo: req.params.userNo}).lean().exec(function (err, transac) {
+    Transaction.find({}).lean().exec(function (err, transac) {
         console.log(transac);
         res.json( {transactions: transac});
     });
@@ -32,6 +33,13 @@ router.post('/new', function (req, res) {
         }
         else {
             res.json({added: true, transaction: transac});
+        }
+    });
+
+    Bank.update({userNo: req.body.userNo}, { $inc: { balance: (-1)*req.body.amount }}, function (err, bank) {
+        if(err){
+            res.json({error: err});
+            console.log(err);
         }
     });
 });

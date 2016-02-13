@@ -1,5 +1,6 @@
 var express = require('express');
 var User = require('../models/User');
+var Bank = require('../models/Bank');
 var router = express.Router();
 
 /* GET home page. */
@@ -15,8 +16,10 @@ router.post('/login', function (req, res) {
         if(err || !newUser) {
             res.json({error: true});
         }
-
-        res.json({login: true, user: newUser});
+        else
+        {
+            res.json({login: true, user: newUser});
+        }
     })
 });
 
@@ -36,8 +39,44 @@ router.post('/register', function (req, res) {
             console.log(err);
             res.json({error: true});
         }
-        res.json({register: true, user: user});
+        else
+        {
+            res.json({register: true, user: user});
+        }
     })
+});
+
+
+router.post('/start', function (req, res) {
+
+    bank = new Bank({
+       userNo: req.body.userNo,
+        balance: req.body.balance,
+        monthlyCredit: req.body.monthlyCredit
+    });
+
+    bank.save(function (err, bank) {
+        if(err){
+            res.json({error: err});
+        }
+        else{
+            res.json({bank: bank});
+        }
+    });
+
+});
+
+
+router.get('/getBalance', function (req, res) {
+
+    Bank.findOne({}, function (err, bank) {
+        if(err || !bank) {
+            res.json({error: err});
+        }
+        else {
+            res.json({balance: bank.balance});
+        }
+    });
 });
 
 
@@ -49,5 +88,6 @@ router.get('/logout', function (req, res) {
 router.get('/test', function (req, res) {
     res.json({this: "works"});
 });
+
 
 module.exports = router;

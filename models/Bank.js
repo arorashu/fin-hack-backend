@@ -12,8 +12,8 @@ var connection = mongoose.createConnection('mongodb://127.0.0.1:27017/moneyManag
 
 var Bank = new Schema({
     userNo: Number,
-    Balance: Number,
-    monthlyCredit: Number,
+    balance: Number,
+    monthlyCredit: Number
 });
 
 module.exports = mongoose.model('Bank', Bank);
