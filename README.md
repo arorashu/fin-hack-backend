@@ -36,12 +36,15 @@ Should work on other versions too, but mongodb is not officially supported on 15
 ### modules:
 
   Clone the project using git and cd into it:
-    git clone https://github.com/codemerlin19/fin-hack-backend.git
-    cd fin-hack-backend
+  
+      git clone https://github.com/codemerlin19/fin-hack-backend.git
+    
+      cd fin-hack-backend
     
   Run npm install - this installs all the dependencies of the project (found in package.json) :
-    npm install
+    
+      npm install
     
 ## Run
 
-npm start
+    npm start
