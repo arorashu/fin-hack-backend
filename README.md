@@ -47,4 +47,10 @@ Should work on other versions too, but mongodb is not officially supported on 15
     
 ## Run
 
+  Start Mongo
+  
+    mongod
+  
+  Start App
+  
     npm start
